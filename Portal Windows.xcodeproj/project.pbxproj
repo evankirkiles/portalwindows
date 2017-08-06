@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8413AB091F36324100DC62CC /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8413AB081F36324100DC62CC /* MainScene.swift */; };
+		843015341F34E59C0046C891 /* Nodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843015331F34E59C0046C891 /* Nodes.swift */; };
 		847EC4F31F314A9A008A614C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847EC4F21F314A9A008A614C /* AppDelegate.swift */; };
 		847EC4F51F314A9A008A614C /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 847EC4F41F314A9A008A614C /* art.scnassets */; };
-		847EC4F71F314A9A008A614C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847EC4F61F314A9A008A614C /* ViewController.swift */; };
+		847EC4F71F314A9A008A614C /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847EC4F61F314A9A008A614C /* GameViewController.swift */; };
 		847EC4FA1F314A9A008A614C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 847EC4F81F314A9A008A614C /* Main.storyboard */; };
 		847EC4FC1F314A9A008A614C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 847EC4FB1F314A9A008A614C /* Assets.xcassets */; };
 		847EC4FF1F314A9A008A614C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 847EC4FD1F314A9A008A614C /* LaunchScreen.storyboard */; };
@@ -35,10 +37,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8413AB081F36324100DC62CC /* MainScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScene.swift; sourceTree = "<group>"; };
+		843015331F34E59C0046C891 /* Nodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nodes.swift; sourceTree = "<group>"; };
 		847EC4EF1F314A9A008A614C /* Portal Windows.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Portal Windows.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		847EC4F21F314A9A008A614C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		847EC4F41F314A9A008A614C /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
-		847EC4F61F314A9A008A614C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		847EC4F61F314A9A008A614C /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		847EC4F91F314A9A008A614C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		847EC4FB1F314A9A008A614C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		847EC4FE1F314A9A008A614C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -101,7 +105,9 @@
 			children = (
 				847EC4F21F314A9A008A614C /* AppDelegate.swift */,
 				847EC4F41F314A9A008A614C /* art.scnassets */,
-				847EC4F61F314A9A008A614C /* ViewController.swift */,
+				847EC4F61F314A9A008A614C /* GameViewController.swift */,
+				8413AB081F36324100DC62CC /* MainScene.swift */,
+				843015331F34E59C0046C891 /* Nodes.swift */,
 				847EC4F81F314A9A008A614C /* Main.storyboard */,
 				847EC4FB1F314A9A008A614C /* Assets.xcassets */,
 				847EC4FD1F314A9A008A614C /* LaunchScreen.storyboard */,
@@ -260,7 +266,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				847EC4F71F314A9A008A614C /* ViewController.swift in Sources */,
+				847EC4F71F314A9A008A614C /* GameViewController.swift in Sources */,
+				8413AB091F36324100DC62CC /* MainScene.swift in Sources */,
+				843015341F34E59C0046C891 /* Nodes.swift in Sources */,
 				847EC4F31F314A9A008A614C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -427,6 +435,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = Z38G8Z9XR4;
 				INFOPLIST_FILE = "Portal Windows/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "evankirkiles.Portal-Windows";
@@ -440,6 +449,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = Z38G8Z9XR4;
 				INFOPLIST_FILE = "Portal Windows/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "evankirkiles.Portal-Windows";
@@ -526,6 +536,7 @@
 				847EC51B1F314A9A008A614C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		847EC51C1F314A9A008A614C /* Build configuration list for PBXNativeTarget "Portal WindowsTests" */ = {
 			isa = XCConfigurationList;
@@ -534,6 +545,7 @@
 				847EC51E1F314A9A008A614C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		847EC51F1F314A9A008A614C /* Build configuration list for PBXNativeTarget "Portal WindowsUITests" */ = {
 			isa = XCConfigurationList;
@@ -542,6 +554,7 @@
 				847EC5211F314A9A008A614C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
