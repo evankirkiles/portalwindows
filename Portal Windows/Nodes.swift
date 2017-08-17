@@ -13,15 +13,15 @@ class Nodes {
     static let WINDOW_HEIGHT: CGFloat = 0.4
     static let WINDOW_WIDTH: CGFloat = 0.2
     
-    static let PLAYER_HEIGHT: CGFloat = 0.1
-    static let PLAYER_WIDTH: CGFloat = 0.1
-    static let PLAYER_LENGTH: CGFloat = 0.1
+    static let PLAYER_HEIGHT: CGFloat = 0.01
+    static let PLAYER_WIDTH: CGFloat = 0.01
+    static let PLAYER_LENGTH: CGFloat = 0.01
     
     class func initializePlayerNode() -> SCNNode {
         let playerBox = SCNBox(width: Nodes.PLAYER_WIDTH, height: Nodes.PLAYER_HEIGHT, length: Nodes.PLAYER_LENGTH, chamferRadius: 0)
         let playerNode = SCNNode(geometry: playerBox)
-        playerNode.isHidden = true
-        playerNode.physicsBody = SCNPhysicsBody(type: SCNPhysicsBodyType.dynamic, shape: SCNPhysicsShape.init(geometry: playerBox))
+        playerNode.name = "playerNode"
+        playerNode.physicsBody = SCNPhysicsBody(type: SCNPhysicsBodyType.kinematic, shape: SCNPhysicsShape.init(geometry: playerBox))
         playerNode.physicsBody?.isAffectedByGravity = false
         playerNode.physicsBody!.categoryBitMask = MainScene.PLAYERBITMASK
         playerNode.physicsBody!.collisionBitMask = 0
@@ -50,7 +50,7 @@ class Nodes {
         maskingPlaneNode.renderingOrder = 100
         maskingPlaneNode.position = SCNVector3(width * 0.5, 0, 0)
         maskingPlaneNode.eulerAngles = SCNVector3(0, GLKMathDegreesToRadians(180.0), 0)
-        maskingPlaneNode.physicsBody = SCNPhysicsBody(type: SCNPhysicsBodyType.dynamic, shape: SCNPhysicsShape.init(geometry: maskingPlane))
+        maskingPlaneNode.physicsBody = SCNPhysicsBody(type: SCNPhysicsBodyType.kinematic, shape: SCNPhysicsShape.init(geometry: maskingPlane))
         maskingPlaneNode.physicsBody?.isAffectedByGravity = false
         maskingPlaneNode.physicsBody!.categoryBitMask = MainScene.WALLBITMASK
         maskingPlaneNode.physicsBody!.collisionBitMask = 0

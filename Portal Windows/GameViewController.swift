@@ -16,6 +16,9 @@ class GameViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
     var windowAnchor: ARAnchor?
     var playerAnchor: ARAnchor?
     var playerNode: SCNNode?
+    
+    var wallHits: Int = 0
+    
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask { return UIInterfaceOrientationMask.portrait }
     override var shouldAutorotate: Bool { return false }
 
@@ -30,8 +33,9 @@ class GameViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
         
-        // Create the player node
+        // Initialize player
         playerNode = Nodes.initializePlayerNode()
+        sceneView.scene.rootNode.addChildNode(playerNode!)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -40,7 +44,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
             translation.columns.3.z = -1
             let transform = simd_mul(currentFrame.camera.transform, translation)
             
-            playerAnchor = ARAnchor(transform: (sceneView.session.currentFrame?.camera.transform)!)
+            playerAnchor = ARAnchor(transform: currentFrame.camera.transform)
             sceneView.session.add(anchor: playerAnchor!)
             windowAnchor = ARAnchor(transform: transform)
             sceneView.session.add(anchor: windowAnchor!)
@@ -49,11 +53,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
     
     // Override to create and configure nodes for anchors added to the view's session.
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-        if anchor == playerAnchor {
-            playerNode?.position = SCNVector3Make(playerAnchor!.transform.columns.3.x, playerAnchor!.transform.columns.3.y, playerAnchor!.transform.columns.3.z)
-            sceneView.scene.rootNode.addChildNode(playerNode!)
-            return playerNode
-        } else if anchor == windowAnchor {
+        if anchor == windowAnchor {
             let skyBox = MainScene.createWindowedSkyBox(width: 2, length: 2, height: 2)
             skyBox.position = SCNVector3Make(windowAnchor!.transform.columns.3.x, 0, windowAnchor!.transform.columns.3.z)
             sceneView.scene.rootNode.addChildNode(skyBox)
@@ -63,17 +63,25 @@ class GameViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
         }
     }
     
-    func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
-        print("contact made")
-        if contact.nodeB.physicsBody!.categoryBitMask == MainScene.WALLBITMASK || contact.nodeA.physicsBody!.categoryBitMask == MainScene.WALLBITMASK {
-            print("ran into a wall idiot")
+    // Called when the player collides with a masking wall
+    func physicsWorld(_ world: SCNPhysicsWorld, didEnd contact: SCNPhysicsContact) {
+        if contact.nodeB.physicsBody!.categoryBitMask == MainScene.WALLBITMASK {
+            print(contact.nodeA.name, contact.nodeB.parent!.name)
+            if MainScene.checkIfWithinSkyBox(location: contact.nodeA.position, skybox: contact.nodeB.parent!.parent!) {
+                // Hide the scene
+                wallHits += 1
+                print("scene being hidden" + String(wallHits))
+            } else {
+                print("not in skybox")
+            }
+        } else if contact.nodeB.physicsBody!.categoryBitMask == MainScene.WINDOWBITMASK {
+            // Create the other half of the scene
         }
     }
     
+    // Called every frame, currently used to update player location
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
-        let currentTransform = frame.camera.transform
-        playerAnchor = ARAnchor(transform: currentTransform)
-        playerNode?.position = SCNVector3Make(playerAnchor!.transform.columns.3.x, playerAnchor!.transform.columns.3.y, playerAnchor!.transform.columns.3.z)
+        playerNode?.position = SCNVector3Make(frame.camera.transform.columns.3.x, frame.camera.transform.columns.3.y, frame.camera.transform.columns.3.z-0.0000001)
     }
     
     override func viewWillAppear(_ animated: Bool) {
